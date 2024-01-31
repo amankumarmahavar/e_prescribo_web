@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Registration</title>
+    <link rel="stylesheet" href="form-style.css">
+    <meta charset="UTF-8">
+
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Patient Registration</h1>
+        </div>
+        <form action="#" method="post" id='paitent_registration'>
+            <div class="form-group">
+                <label for="name">Name: *</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number: *</label>
+                    <input type="text" id="phoneNumber" name="phoneNumber" inputmode="numeric" pattern="[0-9]*" minlength="10" maxlength="10" required>              
+            </div>
+            <div class="form-group">
+                <label for="otp">OTP (6 characters): *</label>
+                <input type="text" id="otp" name="otp" inputmode="numeric" pattern="[0-9]*" minlength="6" maxlength="6" required>                
+            </div>
+            <div class="form-group">
+                <label for="birthdate">Birthdate: *</label>
+                <input type="date" id="birthdate" name="birthdate" required>
+            </div>
+            <div class="form-group">
+                <label>Gender: *</label>
+                <div class="radio-group" id="gender">
+                    <input type="radio" id="male" name="gender" value="male" required>
+                    <label for="male">Male</label>
+                    
+                    <input type="radio" id="female" name="gender" value="female" required>
+                    <label for="female">Female</label>
+                    
+                    <input type="radio" id="other" name="gender" value="other" required>
+                    <label for="other">Other</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" id="submit" >Register</button>
+            </div>
+        </form>
+    </div>
+    
+    <script type="module">
+
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyC3g2mVWg3f05GLwPxdLSxwMqrwi1TWMpI",
+            authDomain: "eprescribofirebase.firebaseapp.com",
+            projectId: "eprescribofirebase",
+            storageBucket: "eprescribofirebase.appspot.com",
+            messagingSenderId: "330146646688",
+            appId: "1:330146646688:web:313b8a06b418b8f674d7c5",
+            measurementId: "G-HEBZHDZXKV"
+        };
+
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const firestore = getFirestore(app);
+
+        paitent_registration.addEventListener("submit", (e) => {
+    e.preventDefault();
+  
+    let name = document.getElementById("name").value;
+    let phoneNumber = document.getElementById("phoneNumber").value;
+    let dob = document.getElementById("birthdate").value;
+    let male = document.getElementById("male");
+    let female = document.getElementById("female");
+    let other = document.getElementById("other");
+    let gender;
+    if (male.checked) {
+      gender = male.value;
+    } else if (female.checked) {
+      gender = female.value;
+    } else if (other.checked) {
+      gender = other.value;
+    }
+
+
+    const firestoreRef = collection(firestore, "patient");
+            console.log(firestoreRef);
+            addDoc(firestoreRef, {
+                name: name,
+                phoneNumber: phoneNumber,
+                dob: dob,
+                gender: gender,
+            }).then(() => {
+                console.log("Patient's data stored successfully");
+            });
+    
+    
+    
+  });
+        </script>
+    
+</body>
+
+
+<!-- <script src="./paitent_res.js" ></script> -->
+</html>

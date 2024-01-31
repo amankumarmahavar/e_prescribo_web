@@ -1,0 +1,94 @@
+/* Import the Jost font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap');
+
+/* Color Variables */
+:root {
+    --kPrimaryColor: #0FC1A7;
+    --kSecondaryColor: #fff;
+    --kAppAmber: #FFC107;
+    --kAppBlue: #0495CE;
+    --kAppBlack: #333;
+}
+
+/* Global Styles */
+body {
+    font-family: 'Jost', sans-serif; /* Use the Jost font family */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    /* max-width: 1200px; */
+    background-color: var(--kSecondaryColor);
+}
+
+.side-panel {
+    width: 18%;
+    padding: 20px;
+    background-color: var(--kPrimaryColor); /* Use the primary color */
+    color: var(--kSecondaryColor);
+}
+
+.phone-number {
+    margin-bottom: 20px;
+}
+
+.phone-number h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.phone-number p {
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+.user-list {
+    margin-top: 20px;
+}
+
+.user-list h4 {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.user-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.user-list li {
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
+
+.main-content h1 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: var(--kPrimaryColor);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .side-panel {
+        width: 100%;
+    }
+}
