@@ -51,24 +51,16 @@ body {
 }
 
 .user-list {
-    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+
 }
 
 .user-list h4 {
-    font-size: 20px;
-    font-weight: bold;
     margin: 0;
 }
 
-.user-list ul {
-    list-style: none;
-    padding: 0;
-}
 
-.user-list li {
-    font-size: 18px;
-    margin: 5px 0;
-}
 
 .main-content {
     flex: 1;

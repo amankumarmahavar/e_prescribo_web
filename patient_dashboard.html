@@ -14,12 +14,16 @@
             </div>
             <div class="user-list">
                 <h4>User</h4>
-                <ul>
+                <h4>User</h4>
+                <h4>User</h4>
+                <h4>User</h4>
+                <h4>User</h4>
+                <!-- <ul>
                     <li>User 1</li>
                     <li>User 2</li>
                     <li>User 3</li>
                     <!-- Add more user names here -->
-                </ul>
+                </ul> -->
             </div>
         </div>
         <div class="main-content">
@@ -28,4 +32,48 @@
         </div>
     </div>
 </body>
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
+        import { getStorage, ref, uploadBytes, listAll, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-storage.js";
+    // import { getStorage, listAll } from "firebase/storage";
+
+// Replace with your Firebase project configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyC3g2mVWg3f05GLwPxdLSxwMqrwi1TWMpI",
+            authDomain: "eprescribofirebase.firebaseapp.com",
+            projectId: "eprescribofirebase",
+            storageBucket: "eprescribofirebase.appspot.com",
+            messagingSenderId: "330146646688",
+            appId: "1:330146646688:web:313b8a06b418b8f674d7c5",
+            measurementId: "G-HEBZHDZXKV"
+  // ...
+};
+
+initializeApp(firebaseConfig);
+
+const patientNumber = '9909106355/';
+const patientName = 'aman/';
+
+const storage = getStorage();
+const listRef = ref(storage, 'patient/' + patientNumber + patientName);
+
+async function listAllData(currentRef) {
+  try {
+    const res = await listAll(currentRef);
+    res.items.forEach(async (itemRef) => {
+      console.log(itemRef.name);
+      const downloadURL = await getDownloadURL(itemRef);
+      console.log(downloadURL);
+    });
+  } catch (error) {
+    console.error('Error listing files', error);
+  }
+}
+
+listAllData(listRef);
+// listAllData(ref(storage));
+</script>
 </html>
