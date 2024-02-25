@@ -14,7 +14,7 @@
         <div class="content">
             <h2>Welcome, Patient!</h2>
             <p>Please enter your mobile number and OTP to access your dashboard.</p>
-            <form action="#" method="post" id="Patient_login">
+            <form action="patient_dashboard.html" method="post" id="Patient_login">
                 <div class="form-group">
                     <label for="phoneNumber">Phone Number: *</label>
                     <input type="text" id="phoneNumber" name="phoneNumber" inputmode="numeric" pattern="[0-9]*" minlength="10" maxlength="10" required>                </div>
@@ -29,5 +29,15 @@
         </div>
     </div>
 </body>
-
+<script>
+    document.getElementById("Patient_login").addEventListener("submit", function (e) {
+    e.preventDefault(); // Prevent the default form submission
+    const formData = new FormData(this);
+    const serialNumber = formData.get('phoneNumber');
+    // You can perform any additional processing here
+    // (e.g., validation, AJAX requests, etc.)
+    // Then redirect to the display page:
+    window.location.href = `patient_dashboard.html  ?phoneNumber=${serialNumber}`;
+});
+</script>
 </html>
