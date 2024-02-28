@@ -10,6 +10,7 @@
 </head>
 <body>
     <div class="container">
+   
         <div class="side-panel">
             <div class="phone-number">
                 <h3 id="username" > </h3>
@@ -41,7 +42,7 @@
         </div>
 
 
-
+        <div class="pdf-pop"  id="mainContainer"> <p class="close-button">close</p></div>
 
     </div>
     
@@ -54,10 +55,15 @@ const urlParams = new URLSearchParams(queryString);
 const patientNumber = urlParams.get('phoneNumber')+'/';
 document.getElementById('username').innerHTML=urlParams.get('phoneNumber');
 
-// document.getElementById("main-content").addEventListener("click",()=>{    document.getElementById("container-item").classList.add('container-item')
-// })
+// close button fun
 
+document.querySelector(".close-button").addEventListener("click", () => {
+  close();
+});
 
+function close() {
+  document.getElementById("mainContainer").style.display = "none";
+}
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
         import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
@@ -129,6 +135,7 @@ async function userpdf(folderRef) {
       const container = document.createElement('div');
       container.classList.add('container-pdf');
       container.addEventListener("dblclick",()=>{
+
         pdfjsLib.getDocument(downloadURL).promise.then(pdf => {
                 for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber++) {
                     pdf.getPage(pageNumber).then(page => {
@@ -137,9 +144,13 @@ async function userpdf(folderRef) {
 
                         // Create canvas element to render the page
                         const canvas = document.createElement('canvas');
+
                         const context = canvas.getContext('2d');
                         canvas.height = viewport.height;
                         canvas.width = viewport.width;
+                        canvas.classList.add("pop-up")
+                   
+
 
                         // Render PDF page on the canvas
                         const renderContext = {
@@ -148,7 +159,8 @@ async function userpdf(folderRef) {
                         };
                         page.render(renderContext).promise.then(() => {
                             // Append canvas to the PDF container
-                            pdfContainer.appendChild(canvas);
+                            document.getElementById("mainContainer").style.display="block";
+                            mainContainer.appendChild(canvas);
                         });
                     });
                 }
@@ -163,7 +175,7 @@ async function userpdf(folderRef) {
       // Create img element for PDF icon (you can replace with actual PDF icon)
       const pdfIcon = document.createElement('img');
       pdfIcon.classList.add('pdf');
-      pdfIcon.src = 'devtest.png';
+      pdfIcon.src = 'devtest.png';//replace with logo 
       pdfIcon.alt = 'PDF';
 
       // Create div element for displaying download URL
