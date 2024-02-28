@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient Dashboard</title>
     <link rel="stylesheet" href="patient_dashboard.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
+</head>    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
 
 </head>
 <body>
@@ -73,12 +73,9 @@ const firebaseConfig = {
             messagingSenderId: "330146646688",
             appId: "1:330146646688:web:313b8a06b418b8f674d7c5",
             measurementId: "G-HEBZHDZXKV"
-  // ...
 };
 
 initializeApp(firebaseConfig);
-
-// const patientNumber = '9909106355/';
 
 const storage = getStorage();
 
@@ -131,8 +128,33 @@ async function userpdf(folderRef) {
 
       const container = document.createElement('div');
       container.classList.add('container-pdf');
-    //   container.addEventListener("click",()=>{
+      container.addEventListener("dblclick",()=>{
+        pdfjsLib.getDocument(downloadURL).promise.then(pdf => {
+                for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber++) {
+                    pdf.getPage(pageNumber).then(page => {
+                        const scale = 1.5; // Adjust the scale as needed
+                        const viewport = page.getViewport({ scale });
 
+                        // Create canvas element to render the page
+                        const canvas = document.createElement('canvas');
+                        const context = canvas.getContext('2d');
+                        canvas.height = viewport.height;
+                        canvas.width = viewport.width;
+
+                        // Render PDF page on the canvas
+                        const renderContext = {
+                            canvasContext: context,
+                            viewport: viewport
+                        };
+                        page.render(renderContext).promise.then(() => {
+                            // Append canvas to the PDF container
+                            pdfContainer.appendChild(canvas);
+                        });
+                    });
+                }
+            });
+        console.log("clicked");
+      })
      
     //     pop_up?
     //     (container.classList.add("pop-up"),pop_up=false):(container.classList.add('container-pdf'),pop_up=true)
@@ -173,4 +195,3 @@ listAllData(listRef);
 
 // listAllData(ref(storage));
 </script></body>
-</html>
