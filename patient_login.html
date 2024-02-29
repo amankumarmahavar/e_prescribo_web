@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient Login</title>
     <link rel="stylesheet" href="form-style.css">
 </head>
+
 <body>
     <div class="container">
         <div class="header">
@@ -17,10 +19,13 @@
             <form action="patient_dashboard.html" method="post" id="Patient_login">
                 <div class="form-group">
                     <label for="phoneNumber">Phone Number: *</label>
-                    <input type="text" id="phoneNumber" name="phoneNumber" inputmode="numeric" pattern="[0-9]*" minlength="10" maxlength="10" required>                </div>
+                    <input type="text" id="phoneNumber" name="phoneNumber" inputmode="numeric" pattern="[0-9]*"
+                        minlength="10" maxlength="10" required>
+                </div>
                 <div class="form-group">
                     <label for="otp">OTP (6 characters): *</label>
-                    <input type="text" id="otp" name="otp" inputmode="numeric" pattern="[0-9]*" minlength="6" maxlength="6" required>                
+                    <input type="text" id="otp" name="otp" inputmode="numeric" pattern="[0-9]*" minlength="6"
+                        maxlength="6" required>
                 </div>
                 <div class="form-group">
                     <button type="submit" id="submit">Login</button>
@@ -31,13 +36,11 @@
 </body>
 <script>
     document.getElementById("Patient_login").addEventListener("submit", function (e) {
-    e.preventDefault(); // Prevent the default form submission
-    const formData = new FormData(this);
-    const serialNumber = formData.get('phoneNumber');
-    // You can perform any additional processing here
-    // (e.g., validation, AJAX requests, etc.)
-    // Then redirect to the display page:
-    window.location.href = `patient_dashboard.html?phoneNumber=${serialNumber}`;
-});
+        e.preventDefault(); // Prevent the default form submission
+        const formData = new FormData(this);
+        const serialNumber = formData.get('phoneNumber');
+        window.location.href = `patient_dashboard.html?phoneNumber=${serialNumber}`;
+    });
 </script>
+
 </html>

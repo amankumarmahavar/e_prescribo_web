@@ -1,209 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patient Dashboard</title>
-    <link rel="stylesheet" href="patient_dashboard.css">
-</head>    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Dashboard</title>
+  <link rel="stylesheet" href="patient_dashboard.css">
+  <link rel="stylesheet" href="pdf-pop.css">
+</head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
 
 </head>
+
 <body>
-    <div class="container">
-   
-        <div class="side-panel">
-            <div class="phone-number">
-                <h3 id="username" > </h3>
-            </div>
-            <div class="user-list" id="user-list">
-              
-             
-            </div>
-        </div>
-        <div class="main-content " id="main-content" >
-            <div class="title">      Patient Dashboard</div>
-            <!-- <div class="pop-up" id="pop-up">
-                <div class="container-pdf">
-                <img class="pdf" src="devtest.png" alt="eprescribofirebase">
-           <div class="date">
-            ${downloadURL}
-           </div>
-         </div> -->
-            <!-- <iframe src="&embedded=true" frameborder="0" height="500px" width="100%"></iframe> -->
-            <div class="pdf-container" id="pdfContainer">
-            </div>
-            
+  <div class="container">
 
-
-
-
-       
-
-        </div>
-
-
-        <div class="pdf-pop"  id="mainContainer"> <p class="close-button">close</p></div>
-
+    <div class="side-panel">
+      <div class="phone-number">
+        <h3 id="username"> </h3>
+      </div>
+      <div class="user-list" id="user-list">
+      </div>
     </div>
-    
+    <div class="main-content " id="main-content">
+      <div class="title"> Patient Dashboard</div>
+      <div class="pdf-container" id="pdfContainer">
+      </div>
+    </div>
+    <div class="pdf-pop" id="mainContainer">
+      <p class="close-button">close</p>
+    </div>
+
+  </div>
 
 
 
-<script type="module">
-const queryString = window.location.search;
-const urlParams = new URLSearchParams(queryString);
-const patientNumber = urlParams.get('phoneNumber')+'/';
-document.getElementById('username').innerHTML=urlParams.get('phoneNumber');
 
-// close button fun
+  <script type="module">
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const patientNumber = urlParams.get('phoneNumber') + '/';
+    document.getElementById('username').innerHTML = urlParams.get('phoneNumber');
 
-document.querySelector(".close-button").addEventListener("click", () => {
-  close();
-});
+    // close button fun
 
-function close() {
-  document.getElementById("mainContainer").style.display = "none";
-}
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
-        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
-        import { getStorage, ref, uploadBytes, listAll, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-storage.js";
+    document.querySelector(".close-button").addEventListener("click", () => {
+      close();
+    });
+
+    function close() {
+      document.getElementById("mainContainer").style.display = "none";
+    }
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
+    import { getStorage, ref, uploadBytes, listAll, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-storage.js";
     // import { getStorage, listAll } from "firebase/storage";
 
-// Replace with your Firebase project configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyC3g2mVWg3f05GLwPxdLSxwMqrwi1TWMpI",
-            authDomain: "eprescribofirebase.firebaseapp.com",
-            projectId: "eprescribofirebase",
-            storageBucket: "eprescribofirebase.appspot.com",
-            messagingSenderId: "330146646688",
-            appId: "1:330146646688:web:313b8a06b418b8f674d7c5",
-            measurementId: "G-HEBZHDZXKV"
-};
+    // Replace with your Firebase project configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyC3g2mVWg3f05GLwPxdLSxwMqrwi1TWMpI",
+      authDomain: "eprescribofirebase.firebaseapp.com",
+      projectId: "eprescribofirebase",
+      storageBucket: "eprescribofirebase.appspot.com",
+      messagingSenderId: "330146646688",
+      appId: "1:330146646688:web:313b8a06b418b8f674d7c5",
+      measurementId: "G-HEBZHDZXKV"
+    };
 
-initializeApp(firebaseConfig);
+    initializeApp(firebaseConfig);
 
-const storage = getStorage();
+    const storage = getStorage();
 
-const listRef = ref(storage, 'patient/' + patientNumber+'/' );
-const userList = document.getElementById("user-list");
-async function listAllData(currentRef) {
-  try {
-    const res = await listAll(currentRef);
-   
-res.prefixes.forEach(async (folderRef) => {
-  console.log('Folder:', folderRef.name);
+    const listRef = ref(storage, 'patient/' + patientNumber + '/');
+    const userList = document.getElementById("user-list");
+      
+    async function listAllData(currentRef) {
+      try {
+        const res = await listAll(currentRef);
 
-  const folderContainer = document.createElement('div');
-  folderContainer.classList.add('container-item');
+        res.prefixes.forEach(async (folderRef) => {
+          console.log('Folder:', folderRef.name);
 
-  // Create element to display folder name
-  const folderName = document.createElement('div');
-  folderName.textContent = folderRef.name;
-  folderName.id="container-item"
-  folderName.classList.add("user-name");
-  folderName.addEventListener('click',() => user(folderRef.name))
+          const folderContainer = document.createElement('div');
+          folderContainer.classList.add('container-item');
 
-  // Append elements to folder container
-  folderContainer.appendChild(folderName);
+          // Create element to display folder name
+          const folderName = document.createElement('div');
+          folderName.textContent = folderRef.name;
+          folderName.id = "container-item"
+          folderName.classList.add("user-name");
+          folderName.addEventListener('click', () => user(folderRef.name))
 
-  // Append folder container to storageContent
+          // Append elements to folder container
+          folderContainer.appendChild(folderName);
 
-  userList.appendChild(folderContainer);
+          // Append folder container to storageContent
 
-  // List items in the folder recursively
-  listAllData(folderRef);
-});
-  } catch (error) {
-    console.error('Error listing files', error);
-  }
-}
-function user(name){
-    pdfContainer.innerHTML = ''; 
+          userList.appendChild(folderContainer);
 
-const patientName = name;
-const folderRef = ref(storage, 'patient/' + patientNumber+patientName+'/' );
-async function userpdf(folderRef) {
-  try {
-    let pop_up=false;    
-    const res = await listAll(folderRef);
-    res.items.forEach(async (itemRef) => {
+          // List items in the folder recursively
+          listAllData(folderRef);
+        });
+      } catch (error) {
+        console.error('Error listing files', error);
+      }
+    }
+    function user(name) {
+      pdfContainer.innerHTML = '';
 
-      const downloadURL = await getDownloadURL(itemRef);
+      const patientName = name;
+      const folderRef = ref(storage, 'patient/' + patientNumber + patientName + '/');
+      async function userpdf(folderRef) {
+        try {
+          let pop_up = false;
+          const res = await listAll(folderRef);
+          res.items.forEach(async (itemRef) => {
+
+            const downloadURL = await getDownloadURL(itemRef);
 
 
-      const container = document.createElement('div');
-      container.classList.add('container-pdf');
-      container.addEventListener("dblclick",()=>{
+            const container = document.createElement('div');
 
-        pdfjsLib.getDocument(downloadURL).promise.then(pdf => {
+            container.classList.add('container-pdf');
+            container.addEventListener("click", () => {
+
+              pdfjsLib.getDocument(downloadURL).promise.then(pdf => {
                 for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber++) {
-                    pdf.getPage(pageNumber).then(page => {
-                        const scale = 1.5; // Adjust the scale as needed
-                        const viewport = page.getViewport({ scale });
+                  pdf.getPage(pageNumber).then(page => {
+                    const scale = 1; // Adjust the scale as needed
+                    const viewport = page.getViewport({ scale });
 
-                        // Create canvas element to render the page
-                        const canvas = document.createElement('canvas');
+                    // Create canvas element to render the page
+                    const canvas = document.createElement('canvas');
 
-                        const context = canvas.getContext('2d');
-                        canvas.height = viewport.height;
-                        canvas.width = viewport.width;
-                        canvas.classList.add("pop-up")
-                   
+                    const context = canvas.getContext('2d');
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
+                    canvas.classList.add("pop-up")
 
 
-                        // Render PDF page on the canvas
-                        const renderContext = {
-                            canvasContext: context,
-                            viewport: viewport
-                        };
-                        page.render(renderContext).promise.then(() => {
-                            // Append canvas to the PDF container
-                            document.getElementById("mainContainer").style.display="block";
-                            mainContainer.appendChild(canvas);
-                        });
+
+                    // Render PDF page on the canvas
+                    const renderContext = {
+                      canvasContext: context,
+                      viewport: viewport
+                    };
+                    page.render(renderContext).promise.then(() => {
+                      // Append canvas to the PDF container
+                      document.getElementById("mainContainer").style.display = "block";
+                      mainContainer.appendChild(canvas);
                     });
+                  });
                 }
-            });
-        console.log("clicked");
-      })
-     
-    //     pop_up?
-    //     (container.classList.add("pop-up"),pop_up=false):(container.classList.add('container-pdf'),pop_up=true)
-    //   })
+              });
+              console.log("clicked");
+            })
 
-      // Create img element for PDF icon (you can replace with actual PDF icon)
-      const pdfIcon = document.createElement('img');
-      pdfIcon.classList.add('pdf');
-      pdfIcon.src = 'devtest.png';//replace with logo 
-      pdfIcon.alt = 'PDF';
+            //     pop_up?
+            //     (container.classList.add("pop-up"),pop_up=false):(container.classList.add('container-pdf'),pop_up=true)
+            //   })
 
-      // Create div element for displaying download URL
-      const dateDiv = document.createElement('div');
-      dateDiv.classList.add('date');
-      let date=itemRef.name.split(' ')[0];
+            // Create img element for PDF icon (you can replace with actual PDF icon)
+            const pdfIcon = document.createElement('img');
+            pdfIcon.classList.add('pdf');
+            pdfIcon.src = 'pdfLogo.png';//replace with logo 
+            pdfIcon.alt = 'PDF';
 
-      dateDiv.textContent = date;
+            // Create div element for displaying download URL
+            const dateDiv = document.createElement('div');
+            dateDiv.classList.add('date');
+            let date = itemRef.name.split(' ')[0];
 
-
+            dateDiv.textContent = date;
 
 
 
-      // Append elements to container
-      container.appendChild(pdfIcon);
-      container.appendChild(dateDiv);
 
-      // Append container to pdfContainer
-      pdfContainer.appendChild(container);
-          
-    });
-} catch (error) {
-    console.error('Error listing files', error);
-  }
-}
-userpdf(folderRef);
-}
-listAllData(listRef);
 
-// listAllData(ref(storage));
-</script></body>
+            // Append elements to container
+            container.appendChild(pdfIcon);
+            container.appendChild(dateDiv);
+
+            // Append container to pdfContainer
+            pdfContainer.appendChild(container);
+
+          });
+        } catch (error) {
+          console.error('Error listing files', error);
+        }
+      }
+      userpdf(folderRef);
+    }
+    listAllData(listRef);
+
+    // listAllData(ref(storage));
+  </script>
+</body>

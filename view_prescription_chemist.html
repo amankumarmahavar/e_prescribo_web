@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Prescription</title>
     <link rel="stylesheet" href="form-style.css">
+    <link rel="stylesheet" href="pop-up.css">
 </head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
+<script src="pop-up.js"></script>
+
 <body>
     <div class="container">
         <div class="header">
@@ -13,16 +18,70 @@
         </div>
         <div class="content">
             <p>Please enter your 8-character token number to view prescription:</p>
-            <form action="#" method="post">
+            <form action="#" id="view_presc" method="get">
                 <div class="form-group">
                     <label for="token">Token Number (8 characters):</label>
                     <input type="text" id="token" name="token" pattern="[A-Za-z0-9]{8}" maxlength="8" required>
                 </div>
                 <div class="form-group">
-                    <button type="submit">View Prescription</button>
+                    <button type="submit" , id="submit">View Prescription</button>
                 </div>
             </form>
         </div>
     </div>
+    <div class="pdf-pop" id="mainContainer">
+        <p class="close-button">close</p>
+    </div>
+
+    <script type="module">
+        
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
+        import { getFirestore, collection, getDoc, doc } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyC3g2mVWg3f05GLwPxdLSxwMqrwi1TWMpI",
+            authDomain: "eprescribofirebase.firebaseapp.com",
+            projectId: "eprescribofirebase",
+            storageBucket: "eprescribofirebase.appspot.com",
+            messagingSenderId: "330146646688",
+            appId: "1:330146646688:web:313b8a06b418b8f674d7c5",
+            measurementId: "G-HEBZHDZXKV"
+        };
+
+        initializeApp(firebaseConfig);
+        document.querySelector(".close-button").addEventListener("click", () => {
+            close();
+        });
+
+        function close() {
+            document.getElementById("mainContainer").style.display = "none";
+        }
+        async function getDocument(token) {
+            const firestore = await getFirestore();
+
+            const documentRef = await doc(firestore, "prescription_id", token);
+            const documentSnapshot = await getDoc(documentRef);
+
+            if (documentSnapshot.exists()) {
+                const documentData = await documentSnapshot.data();
+                var downloadURL = documentData['downloadURL'];
+                const container = document.createElement('div').classList.add('container-pdf');
+                popup(downloadURL);
+                console.log("clicked");
+            } else {
+                console.log("Document does not exist");
+            }
+        }
+
+        view_presc.addEventListener("submit", function (e) {
+        e.preventDefault(); 
+        const formData = new FormData(this);
+        const token = formData.get('token');
+            getDocument(token);
+        });
+
+    </script>
+
 </body>
+
 </html>
