@@ -9,10 +9,11 @@
     <link rel="stylesheet" href="pop-up.css">
 </head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
-<script src="pop-up.js"></script>
+<script src="./pop-up.js"></script>
 
 <body>
-    <div class="container">
+    <div class="justify-center">
+            <div class="container">
         <div class="header">
             <h1>View Prescription</h1>
         </div>
@@ -24,14 +25,17 @@
                     <input type="text" id="token" name="token" pattern="[A-Za-z0-9]{8}" maxlength="8" required>
                 </div>
                 <div class="form-group">
-                    <button type="submit" , id="submit">View Prescription</button>
+                    <button type="submit"  id="submit">View Prescription</button>
                 </div>
             </form>
         </div>
+  
+   
     </div>
     <div class="pdf-pop" id="mainContainer">
         <p class="close-button">close</p>
     </div>
+</div>
 
     <script type="module">
         

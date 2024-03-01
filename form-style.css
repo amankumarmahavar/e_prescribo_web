@@ -4,7 +4,7 @@
     --kPrimaryColor: #0FC1A7;
     --kSecondaryColor: #f2f2f2;
     --kAppAmber: #FFC107;
-    --kAppBlue: #0495CE;
+    --kAppBlue: #35aedd;
     --kAppBlack: #333;
 }
 
@@ -16,7 +16,15 @@ body {
     padding: 0;
     background-size: contain;
 }
+.justify-center{
+    display: flex;
 
+
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+}
 .container {
     max-width: 600px;
     margin: 0 auto;
