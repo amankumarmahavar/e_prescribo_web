@@ -5,9 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Patient Dashboard</title>
-  <link rel="stylesheet" href="patient_dashboard.css">
-  <link rel="stylesheet" href="root.css">
-  <link rel="stylesheet" href="pdf-pop.css">
+  <link rel="stylesheet" href="css/patient_dashboard.css">
+  <link rel="stylesheet" href="css/root.css">
+  <link rel="stylesheet" href="css/pdf-pop.css">
 </head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
 
@@ -96,21 +96,9 @@
             
           )
 
-          
-          // folderName.onclick =  function() {
-          //   folderName.classList.add('active');
-          // }
-            
-          
-
-          // Append elements to folder container
           folderContainer.appendChild(folderName);
 
-          // Append folder container to storageContent
-
           userList.appendChild(folderContainer);
-
-          // List items in the folder recursively
           listAllData(folderRef);
         });
       } catch (error) {
@@ -142,7 +130,6 @@
                     const scale = 1; // Adjust the scale as needed
                     const viewport = page.getViewport({ scale });
 
-                    // Create canvas element to render the page
                     const canvas = document.createElement('canvas');
 
                     const context = canvas.getContext('2d');
@@ -150,9 +137,6 @@
                     canvas.width = viewport.width;
                     canvas.classList.add("pop-up")
 
-
-
-                    // Render PDF page on the canvas
                     const renderContext = {
                       canvasContext: context,
                       viewport: viewport
@@ -168,14 +152,9 @@
               console.log("clicked");
             })
 
-            //     pop_up?
-            //     (container.classList.add("pop-up"),pop_up=false):(container.classList.add('container-pdf'),pop_up=true)
-            //   })
-
-            // Create img element for PDF icon (you can replace with actual PDF icon)
             const pdfIcon = document.createElement('img');
             pdfIcon.classList.add('pdf');
-            pdfIcon.src = 'pdfLogo.png';//replace with logo 
+            pdfIcon.src = 'images/pdfLogo.png';//replace with logo 
             pdfIcon.alt = 'PDF';
 
             // Create div element for displaying download URL
@@ -185,15 +164,8 @@
 
             dateDiv.textContent = date;
 
-
-
-
-
-            // Append elements to container
             container.appendChild(pdfIcon);
             container.appendChild(dateDiv);
-
-            // Append container to pdfContainer
             pdfContainer.appendChild(container);
 
           });
@@ -204,7 +176,5 @@
       userpdf(folderRef);
     }
     listAllData(listRef);
-
-    // listAllData(ref(storage));
   </script>
 </body>
