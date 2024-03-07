@@ -38,10 +38,7 @@
 </body>
 <script>
     document.getElementById("Patient_login").addEventListener("submit", function (e) {
-        e.preventDefault(); // Prevent the default form submission
-        const formData = new FormData(this);
-        const serialNumber = formData.get('phoneNumber');
-        window.location.href = `patient_dashboard.html?phoneNumber=${serialNumber}`;
+        sessionStorage.setItem('phoneNumber', new FormData(this).get('phoneNumber') )
     });
 </script>
 

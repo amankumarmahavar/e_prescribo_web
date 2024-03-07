@@ -71,6 +71,9 @@ div {
     color: var(--kAppAmber);
 }
 
+.user-name.active{
+  color: var(--kAppAmber);
+}
 
 .main-content {
     flex: 1;

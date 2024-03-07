@@ -38,10 +38,12 @@
 
 
   <script type="module">
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const patientNumber = urlParams.get('phoneNumber') + '/';
-    document.getElementById('username').innerHTML = urlParams.get('phoneNumber');
+    // const queryString = window.location.search;
+    // const urlParams = new URLSearchParams(queryString);
+    // const patientNumber = urlParams.get('phoneNumber') + '/';
+    const patientNumber =sessionStorage.getItem('phoneNumber');
+    console.log(patientNumber);
+    document.getElementById('username').innerHTML = patientNumber;
 
     // close button fun
 
@@ -73,6 +75,7 @@
 
     const listRef = ref(storage, 'patient/' + patientNumber + '/');
     const userList = document.getElementById("user-list");
+    
       
     async function listAllData(currentRef) {
       try {
@@ -89,7 +92,16 @@
           folderName.textContent = folderRef.name;
           folderName.id = "container-item"
           folderName.classList.add("user-name");
-          folderName.addEventListener('click', () => user(folderRef.name))
+          folderName.addEventListener('click', () => user(folderRef.name),
+            
+          )
+
+          
+          // folderName.onclick =  function() {
+          //   folderName.classList.add('active');
+          // }
+            
+          
 
           // Append elements to folder container
           folderContainer.appendChild(folderName);
@@ -109,13 +121,13 @@
       pdfContainer.innerHTML = '';
 
       const patientName = name;
-      const folderRef = ref(storage, 'patient/' + patientNumber + patientName + '/');
+      const folderRef = ref(storage, 'patient/' + patientNumber+'/' + patientName + '/');
       async function userpdf(folderRef) {
+        console.log(folderRef);
         try {
           let pop_up = false;
           const res = await listAll(folderRef);
           res.items.forEach(async (itemRef) => {
-
             const downloadURL = await getDownloadURL(itemRef);
 
 
