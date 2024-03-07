@@ -1,8 +1,10 @@
 .overview {
   padding: 2rem;
+ 
+}
+.main{
   background-color: #0495ce48;
 }
-
 .overview-flex {
   display: flex;
   gap: 40px;
@@ -42,15 +44,17 @@
 }
 
 
-
+/* header css start */
 
 .header{
   display: block;
     width: 100%;
+    position: fixed; /* Change position to fixed */
+    top: 0;
     background-color: var(--kPrimaryColor);
 height: 55px;
 
-
+z-index: 1;
 
 
 }
@@ -87,7 +91,7 @@ padding: 15px;
 {
     width: 50px;
     height: 50px;
-    display: flex;
+    display: none;
 
 }
 
@@ -113,3 +117,38 @@ padding: 15px;
 
 }
 
+
+/* card css pricing
+ */
+
+.card{
+  width: 100%;
+padding: 25px;
+display: flex;
+flex-direction: row;
+gap: 40px;
+justify-content: center;
+flex-basis: 28rem;
+}
+.card-items{
+
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: whitesmoke;
+margin: 51px;
+  width: 250px;
+  border-radius: 50px;
+
+}
+
+.price{
+  text-transform: capitalize;
+font-size: 25px;
+font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+font-weight: 300;
+
+
+  text-align: center;
+}
