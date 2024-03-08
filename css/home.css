@@ -58,3 +58,46 @@
     padding-left: 10px;
     margin-bottom: 30px;
 }
+
+.overview {
+    padding: 2rem;
+   
+  }
+  .overview-flex {
+    display: flex;
+    gap: 40px;
+  }
+  
+  .overview-text-box {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    flex-basis: 50%;
+  }
+  
+  .overview-text {
+    font-family: Montserrat;
+    font-size: 1.375rem;
+    font-weight: 400;
+  
+    flex-basis: 80%;
+    line-height: 1.68rem;
+  }
+  
+  .overview-image {
+    display: flex;
+    flex-basis: 50%;
+    text-align: center;
+    margin: 5rem auto;
+  }
+  .overview-image img {
+    width: 100%;
+  }
+  
+  
+  .img-width {
+    flex-basis: 30%;
+  }
+  
+  
