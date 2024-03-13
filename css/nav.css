@@ -22,7 +22,7 @@
 .nav-logo {
   width: auto;
   height: 55px;
-float: left;
+  float: left;
   display: flex;
   align-items: center;
   padding: 15px;
@@ -40,12 +40,13 @@ float: left;
 
 
   .nav-items{
-      float: right;
+  float: right;
   display: flex;
   flex-direction: row;
   align-items: center;
   height: 55px;
   padding: 15px;
+  margin-right: 100px;
 }
 
 .items {
