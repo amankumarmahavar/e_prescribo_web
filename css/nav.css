@@ -61,7 +61,8 @@
 
 .items:hover a {
   cursor: pointer;
-  color: var(--kAppAmber);
+  background-color: var(--kPrimaryColor);
+  color: white;
 }
 
 
