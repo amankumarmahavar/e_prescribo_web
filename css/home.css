@@ -106,9 +106,7 @@
     color: #fff;
     margin-top: auto; /* Push the footer to the bottom */
     width: 100%;
-    position: absolute;
-    bottom: 0;
-    padding: 20px 0;
+   
 }
 .container {
     max-width: 1200px;
