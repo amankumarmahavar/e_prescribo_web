@@ -1,0 +1,33 @@
+footer {
+    display: flex;
+    justify-content: space-between;
+    background-color: #333;
+    color: white;
+    padding: 1rem;
+}
+
+.footer-heading {
+    display: flex;
+    flex-direction: column;
+    margin-left: 100px;
+    gap: 1rem;
+    justify-content: space-evenly;
+    padding: 1rem;
+}
+
+.footer-heading p {
+    margin-top: .5rem;
+}
+
+.footer-menu{
+    padding-top: 30px;
+}
+
+.footer-menu ul {
+    margin: 1rem;
+    list-style: none;
+}
+
+.footer-menu ul li {
+    padding: .5rem;
+}
