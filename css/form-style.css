@@ -10,7 +10,6 @@
 
 /* Global Styles */
 body {
-    font-family:  'Jost', 'Helvetica Neue', sans-serif;
     background-color: var(--kSecondaryColor);
     margin: 0;
     padding: 0;

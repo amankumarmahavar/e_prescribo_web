@@ -10,7 +10,6 @@ div {
   }
 /* Global Styles */
   body {
-      font-family: 'Jost', sans-serif; /* Use the Jost font family */
       margin: 0;
       padding: 0;
       display: flex;

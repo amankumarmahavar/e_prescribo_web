@@ -13,7 +13,6 @@
 .navbar {
   text-transform: capitalize;
   font-size: 18px;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-weight: 3000;
   color: var(--kSecondaryColor);
   flex-direction: row;
