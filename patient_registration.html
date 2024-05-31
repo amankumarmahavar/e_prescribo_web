@@ -61,7 +61,7 @@
         <script type="module">
 
             import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
-            import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
+            import { getFirestore,doc, setDoc  } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
 
             const firebaseConfig = {
                 apiKey: "AIzaSyC3g2mVWg3f05GLwPxdLSxwMqrwi1TWMpI",
@@ -99,9 +99,10 @@
                 }
 
 
-                const firestoreRef = collection(firestore, "patient");
-                console.log(firestoreRef);
-                addDoc(firestoreRef, {
+                var docID = phoneNumber+dob;
+                var collection = 'patient';
+
+                setDoc(doc(firestore,collection, docID), {
                     name: name,
                     phoneNumber: phoneNumber,
                     dob: dob,

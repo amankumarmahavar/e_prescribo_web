@@ -38,6 +38,10 @@
                 <textarea id="address" name="address" required></textarea>
             </div>
             <div class="form-group">
+                <label for="birthdate">Birthdate: *</label>
+                <input type="date" id="birthdate" name="birthdate" required>
+            </div>
+            <div class="form-group">
                 <label for="aadhaar">Aadhaar Number: *</label>
                 <input type="text" id="aadhaar" name="aadhaar" inputmode="numeric" pattern="[0-9]*" minlength="12"
                     maxlength="12" required>
@@ -74,7 +78,7 @@
 
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
-        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
+        import { getFirestore,doc, setDoc  } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
         import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-storage.js";
 
         const firebaseConfig = {
@@ -101,6 +105,7 @@
             let email = document.getElementById("email").value;
             let password = document.getElementById("password").value;
             let name = document.getElementById("name").value;
+            let dob = document.getElementById("birthdate").value;
             let phoneNumber = document.getElementById("phoneNumber").value;
             let address = document.getElementById("address").value;
             let addharNumber = document.getElementById("aadhaar").value;
@@ -128,10 +133,13 @@
 
 
             //Saving doctor's data
-            const firestoreRef = collection(firestore, "doctors");
-            console.log(firestoreRef);
-            addDoc(firestoreRef, {
+            // const firestoreRef = collection(firestore, "doctors");
+            var collection = "doctors";
+            var docID = phoneNumber+dob;
+            // console.log(firestoreRef);
+            setDoc(doc(firestore, collection, docID), {
                 email: email,
+                dob:dob,
                 name: name,
                 phoneNumber: phoneNumber,
                 aadhar: addharNumber,
