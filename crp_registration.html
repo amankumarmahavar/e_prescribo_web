@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Registration</title>
+    <link rel="stylesheet" href="css/root.css" />
+    <link rel="stylesheet" href="css/form-style.css">
+    <link rel="stylesheet" href="css/datepicker.css">
+</head>
+
+<body> 
+    <div class="container">
+        <div class="header">
+            <h1>Doctor Registration</h1>
+        </div>
+        <form action="#" method="post" enctype="multipart/form-data" id="doctor_registration">
+            <div class="form-group">
+                <label>Type: *</label>
+                <div class="radio-group" id="type">
+                    <input type="radio" id="chemist" name="type" value="chemist" required>
+                    <label for="chemist">Chemist</label>
+
+                    <input type="radio" id="radiologist" name="type" value="radiologist" required>
+                    <label for="radiologist">Radiologist</label>
+
+                    <input type="radio" id="pathologist" name="type" value="pathologist" required>
+                    <label for="pathologist">Pathologist</label>
+                </div>
+            </div>
+           
+            <div class="form-group">
+                <label for="name">Name: *</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="clinicName">Shop/Lab Name: *</label>
+                <input type="text" id="clinicName" name="clinicName" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email: *</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password: *</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number: *</label>
+                <input type="text" id="phoneNumber" name="phoneNumber" inputmode="numeric" pattern="[0-9]*"
+                    minlength="10" maxlength="10" required>
+            </div>
+            <div class="form-group">
+                <label for="birthdate">Date of Birth: *</label>
+                <input type="date" id="birthdate" name="birthdate" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Address: *</label>
+                <textarea id="address" name="address" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Gender: *</label>
+                <div class="radio-group" id="gender">
+                    <input type="radio" id="male" name="gender" value="male" required>
+                    <label for="male">Male</label>
+
+                    <input type="radio" id="female" name="gender" value="female" required>
+                    <label for="female">Female</label>
+
+                    <input type="radio" id="other" name="gender" value="other" required>
+                    <label for="other">Other</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="aadhaar">Aadhaar Number: *</label>
+                <input type="text" id="aadhaar" name="aadhaar" inputmode="numeric" pattern="[0-9]*" minlength="12"
+                    maxlength="12" required>
+            </div>
+            <div class="form-group">
+                <label for="aadharFile">Upload Aadhaar Card: *</label>
+                <input type="file" id="aadharFile" name="aadharFile" accept=".pdf, .jpg, .jpeg, .png" required>
+            </div>
+            
+            
+            <div class="form-group">
+                <label for="license">License Number: *</label>
+                <input type="text" id="license" name="license" required>
+            </div>
+            <div class="form-group">
+                <label for="licenseFile">Upload License Document: *</label>
+                <input type="file" id="licenseFile" name="licenseFile" accept=".pdf, .jpg, .jpeg, .png" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="aadharFile">Upload Profile photo: *</label>
+                <input type="file" id="profilePhoto" name="profilePhoto" accept=".jpg, .jpeg, .png" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="qualification">Qualification List *</label>
+                <div id="qualification-container">
+                    <div class="qualification-group">
+                        <label>Qualification Title:</label>
+                        <input type="text" name="qualification[]" required>
+                        <label>Qualification Proof:</label>
+                        <input type="file" name="qualificationProof[]" accept=".pdf, .jpg, .jpeg, .png" required>
+                    </div>
+                </div>
+                <button type="button" onclick="addQualification()">Add More</button>
+            </div>
+            
+            <div class="form-group">
+                <label for="researches">Researches (if any):</label>
+                <div id="research-container">
+                    <div class="research-group">
+                        <label>Research Title:</label>
+                        <input type="text" name="researchTitle[]">
+                        <label>Research Proof:</label>
+                        <input type="file" name="researchProof[]" accept=".pdf, .jpg, .jpeg, .png">
+                    </div>
+                </div>
+                <button type="button" onclick="addResearch()">Add More</button>
+            </div>
+            <div class="form-group">
+                <label for="publications">Publications (if any):</label>
+                <div id="publication-container">
+                    <div class="publication-group">
+                        <label>Publication Title:</label>
+                        <input type="text" name="publicationTitle[]">
+                        <label>Publication Proof:</label>
+                        <input type="file" name="publicationProof[]" accept=".pdf, .jpg, .jpeg, .png">
+                    </div>
+                </div>
+                <button type="button" onclick="addPublication()">Add More</button>
+            </div>
+            <div class="form-group">
+                <label for="experience">Professional Experience (if any):</label>
+                <div id="experience-container">
+                    <div class="experience-group">
+                        <label>Experience Title:</label>
+                        <input type="text" name="experienceTitle[]">
+                        <label>Experience Proof:</label>
+                        <input type="file" name="experienceProof[]" accept=".pdf, .jpg, .jpeg, .png">
+                    </div>
+                </div>
+                <button type="button" onclick="addExperience()">Add More</button>
+            </div>
+            <div class="form-group">
+                <button type="submit" id="submit">Request to register</button>
+            </div>
+        </form>
+    </div>
+
+
+
+    <script type="module">
+
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
+        import { getFirestore,doc, setDoc  } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
+        import { getStorage, ref, uploadBytes,getDownloadURL  } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-storage.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyC3g2mVWg3f05GLwPxdLSxwMqrwi1TWMpI",
+            authDomain: "eprescribofirebase.firebaseapp.com",
+            projectId: "eprescribofirebase",
+            storageBucket: "eprescribofirebase.appspot.com",
+            messagingSenderId: "330146646688",
+            appId: "1:330146646688:web:313b8a06b418b8f674d7c5",
+            measurementId: "G-HEBZHDZXKV"
+        };
+
+
+    // Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const firestore = getFirestore(app);
+const storage = getStorage(app);
+
+document.getElementById("doctor_registration").addEventListener("submit", (e) => {
+    e.preventDefault();
+    
+    // Collecting form data
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+    let name = document.getElementById("name").value;
+    let clinicName = document.getElementById("clinicName").value;
+    let dob = document.getElementById("birthdate").value;
+    let phoneNumber = document.getElementById("phoneNumber").value;
+    let address = document.getElementById("address").value;
+    let aadhaarNumber = document.getElementById("aadhaar").value;
+    let licenseNumber = document.getElementById("license").value;
+    let male = document.getElementById("male");
+                let female = document.getElementById("female");
+                let other = document.getElementById("other");
+                let gender;
+                if (male.checked) {
+                    gender = male.value;
+                } else if (female.checked) {
+                    gender = female.value;
+                } else if (other.checked) {
+                    gender = other.value;
+                }
+                let chemist = document.getElementById("chemist");
+                let radiologist = document.getElementById("radiologist");
+                let pathologist = document.getElementById("pathologist");
+                let type;
+                if (chemist.checked) {
+                    type = chemist.value;
+                } else if (radiologist.checked) {
+                    type = radiologist.value;
+                } else if (pathologist.checked) {
+                    type = pathologist.value;
+                }
+    let aadharFile = document.getElementById("aadharFile").files[0];
+    let licenseFile = document.getElementById("licenseFile").files[0];
+    let profilePhoto = document.getElementById("profilePhoto").files[0];
+
+    // Collecting specialization data
+    // let mainCategories = document.getElementsByName("mainCategory[]");
+    // let subCategories = document.getElementsByName("subCategory[]");
+
+    // Collecting qualification data
+    let qualifications = document.getElementsByName("qualification[]");
+    let qualificationProofs = document.getElementsByName("qualificationProof[]");
+
+    // Collecting research data
+    let researchTitles = document.getElementsByName("researchTitle[]");
+    let researchProofs = document.getElementsByName("researchProof[]");
+
+    // Collecting publication data
+    let publicationTitles = document.getElementsByName("publicationTitle[]");
+    let publicationProofs = document.getElementsByName("publicationProof[]");
+
+    // Collecting experience data
+    let experienceTitles = document.getElementsByName("experienceTitle[]");
+    let experienceProofs = document.getElementsByName("experienceProof[]");
+
+    // Create user
+    createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            console.log('User created successfully');
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.error(errorCode, errorMessage);
+        });
+
+    // Saving doctor's data
+    var collection = type;
+    var docID = phoneNumber + dob;
+    setDoc(doc(firestore, collection, docID), {
+        email: email,
+        dob: dob,
+        name: name,
+        clinicName: clinicName,
+        phoneNumber: phoneNumber,
+        aadhaar: aadhaarNumber,
+        licenseNumber: licenseNumber,
+        address: address,
+        gender: gender,
+        rating:3,
+    }).then(() => {
+        console.log(type+ "'s data stored successfully");
+    });
+
+    // Saving documents of doctor
+    const aadhaarRef = ref(storage, `${collection}/${email}/aadhaarCard`);
+    uploadBytes(aadhaarRef, aadhaarFile).then((snapshot) => {
+        getDownloadURL(aadhaarRef).then((downloadURL) => {setDoc(doc(firestore, collection, docID, 'aadhaar', aadhaarNumber), {
+                aadhaarNumber: aadhaarNumber, 
+                downloadURL: downloadURL
+            }).then(() => {
+                console.log(`Saved aadhaar details to Firestore`);
+            }).catch((error) => {
+                console.error(`Error getting download URL for aadhaar: `, error);
+            });}).catch((error) => {
+            console.error(`Error uploading aadhaar: `, error);
+        });
+    });
+
+    const profileRef = ref(storage, `${collection}/${email}/profileFile`);
+    uploadBytes(profileRef, profilePhoto).then((snapshot) => {
+        getDownloadURL(profileRef).then((downloadURL) => {setDoc(doc(firestore, collection, docID, 'profilePhoto','profilePhoto'), {
+                downloadURL: downloadURL
+            }).then(() => {
+                console.log(`Saved profile photo details to Firestore`);
+            }).catch((error) => {
+                console.error(`Error getting download URL for profile photo: `, error);
+            });}).catch((error) => {
+            console.error(`Error uploading profile: `, error);
+        });
+    });
+    const licenceRef = ref(storage, `${collection}/${email}/licence`);
+    uploadBytes(licenceRef, licenseFile).then((snapshot) => {
+        getDownloadURL(licenceRef).then((downloadURL) => {setDoc(doc(firestore, collection, docID, 'licence',licenseNumber), {
+                licenseNumber: licenseNumber,
+                downloadURL: downloadURL
+            }).then(() => {
+                console.log(`Saved licence details to Firestore`);
+            }).catch((error) => {
+                console.error(`Error getting download URL for licence: `, error);
+            });}).catch((error) => {
+            console.error(`Error uploading licence: `, error);
+        });
+    });
+
+    // Saving specialization data
+    // for (let i = 0; i < mainCategories.length; i++) {
+    //     if (mainCategories[i].value && subCategories[i].value) {
+    //         setDoc(doc(firestore, collection, docID, "specializations", mainCategories[i].value), {
+    //             mainCategory: mainCategories[i].value,
+    //             subCategory: subCategories[i].value
+    //         }).then(() => {
+    //             console.log('Specialization data stored for ' + mainCategories[i].value);
+    //         });
+    //     }
+    // }
+
+    // Saving qualifications data
+for (let i = 0; i < qualifications.length; i++) {
+    if (qualifications[i].value && qualificationProofs[i].files[0]) {
+        const qualificationTitle = qualifications[i].value;
+        const qualificationFile = qualificationProofs[i].files[0];
+
+        // Upload qualification proof to Firebase Storage
+        const qualificationRef = ref(storage, `${collection}/${email}/qualificationProofs/${qualificationTitle}`);
+        uploadBytes(qualificationRef, qualificationFile).then((snapshot) => {
+            console.log(`Uploaded qualification proof for ${qualificationTitle}`);
+
+            // Save qualification data to Firestore
+            getDownloadURL(qualificationRef).then((downloadURL) => {setDoc(doc(firestore, collection, docID, 'qualifications', qualificationTitle), {
+                title:qualificationTitle,
+                downloadURL: downloadURL
+            }).then(() => {
+                console.log(`Saved qualification ${qualificationTitle} details to Firestore`);
+            }).catch((error) => {
+                console.error(`Error getting download URL for publication ${qualificationTitle}: `, error);
+            });}).catch((error) => {
+                console.error(`Error saving qualification ${qualificationTitle} details: `, error);
+            });
+        }).catch((error) => {
+            console.error(`Error uploading qualification proof for ${qualificationTitle}: `, error);
+        });
+    }
+}
+
+// Saving researches data
+for (let i = 0; i < researchTitles.length; i++) {
+    if (researchTitles[i].value && researchProofs[i].files[0]) {
+        const researchTitle = researchTitles[i].value;
+        const researchFile = researchProofs[i].files[0];
+
+        // Upload research proof to Firebase Storage
+        const researchRef = ref(storage, `${collection}/${email}/researchProofs/${researchTitle}`);
+        uploadBytes(researchRef, researchFile).then((snapshot) => {
+            console.log(`Uploaded research proof for ${researchTitle}`);
+
+            // Save research data to Firestore
+            getDownloadURL(researchRef).then((downloadURL) => {setDoc(doc(firestore, collection, docID, 'researches', researchTitle), {
+                title: researchTitle,
+                downloadURL: downloadURL
+            }).then(() => {
+                console.log(`Saved research ${researchTitle} details to Firestore`);
+            }).catch((error) => {
+                console.error(`Error saving research ${researchTitle} details: `, error);
+            });
+        }).catch((error) => {
+                console.error(`Error getting download URL for publication ${researchTitle}: `, error);
+            });}).catch((error) => {
+            console.error(`Error uploading research proof for ${researchTitle}: `, error);
+        });
+    }
+}
+
+// Similar code structure for publications and experiences...
+
+
+   // Saving publications data
+for (let i = 0; i < publicationTitles.length; i++) {
+    if (publicationTitles[i].value && publicationProofs[i].files[0]) {
+        const publicationTitle = publicationTitles[i].value;
+        const publicationFile = publicationProofs[i].files[0];
+
+        // Upload publication proof to Firebase Storage
+        const publicationRef = ref(storage, `${collection}/${email}/publicationProofs/${publicationTitle}`);
+        uploadBytes(publicationRef, publicationFile).then((snapshot) => {
+            console.log(`Uploaded publication proof for ${publicationTitle}`);
+
+            // Save publication data to Firestore
+            getDownloadURL(publicationRef).then((downloadURL) => {setDoc(doc(firestore, collection, docID, 'publications', publicationTitle), {
+                title: publicationTitle,
+                downloadURL: downloadURL
+            }).then(() => {
+                console.log(`Saved publication ${publicationTitle} details to Firestore`);
+            }).catch((error) => {
+                console.error(`Error saving publication ${publicationTitle} details: `, error);
+            });
+        }).catch((error) => {
+                console.error(`Error getting download URL for publication ${publicationTitle}: `, error);
+            });}).catch((error) => {
+            console.error(`Error uploading publication proof for ${publicationTitle}: `, error);
+        });
+    }
+}
+
+
+    // Saving experience data
+for (let i = 0; i < experienceTitles.length; i++) {
+    if (experienceTitles[i].value && experienceProofs[i].files[0]) {
+        const experienceTitle = experienceTitles[i].value;
+        const experienceFile = experienceProofs[i].files[0];
+
+        // Upload experience proof to Firebase Storage
+        const experienceRef = ref(storage, `${collection}/${email}/experienceProofs/${experienceTitle}`);
+        uploadBytes(experienceRef, experienceFile).then((snapshot) => {
+            console.log(`Uploaded experience proof for ${experienceTitle}`);
+
+            // Save experience data to Firestore
+            getDownloadURL(experienceRef).then((downloadURL) => {setDoc(doc(firestore, collection, docID, 'experiences', experienceTitle), {
+                title:experienceTitle,
+                downloadURL: downloadURL
+            }).then(() => {
+                console.log(`Saved experience ${experienceTitle} details to Firestore`);
+            }).catch((error) => {
+                console.error(`Error saving experience ${experienceTitle} details: `, error);
+            });
+        }).catch((error) => {
+                console.error(`Error getting download URL for publication ${experienceTitle}: `, error);
+            });}).catch((error) => {
+            console.error(`Error uploading experience proof for ${experienceTitle}: `, error);
+        });
+    }
+}
+
+    // Reset the form
+    // document.getElementById("doctor_registration").reset();
+});
+
+    </script>
+</body>
+
+</html>
